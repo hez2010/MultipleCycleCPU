@@ -49,10 +49,11 @@
 // IR States
 `define STATE_IF 3'b000
 `define STATE_ID 3'b001
-`define STATE_EXE_A 3'b110 // arithmetic
-`define STATE_EXE_B 3'b101 // branch
-`define STATE_EXE_M 3'b010 // memory
+`define STATE_EXE_AL 3'b110
+`define STATE_EXE_BR 3'b101
+`define STATE_EXE_LS 3'b010
 `define STATE_MEM 3'b011
-`define STATE_WB 3'b100
+`define STATE_WB_AL 3'b111
+`define STATE_WB_LD 3'b100
 
 `endif
