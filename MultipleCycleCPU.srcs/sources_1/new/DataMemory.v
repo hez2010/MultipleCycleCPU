@@ -28,4 +28,20 @@ module DataMemory(
     input [31:0] DataIn,
     output [31:0] DataOut
     );
+
+    reg [7:0] memory[0:127];
+    
+    assign DataOut[7:0] = mRD ? memory[DAddr + 3] : 8'bz; 
+    assign DataOut[15:8] = mRD ? memory[DAddr + 2] : 8'bz;
+    assign DataOut[23:16] = mRD ? memory[DAddr + 1] : 8'bz;
+    assign DataOut[31:24] = mRD ? memory[DAddr] : 8'bz;
+    
+    always @(negedge CLK) begin
+        if (mWR) begin
+            memory[DAddr] <= DataIn[31:24];
+            memory[DAddr + 1] <= DataIn[23:16];
+            memory[DAddr + 2] <= DataIn[15:8];
+            memory[DAddr + 3] <= DataIn[7:0];
+        end
+    end
 endmodule

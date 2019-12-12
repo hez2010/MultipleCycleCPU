@@ -31,7 +31,7 @@ module ControlUnit(
     output InsMemRW,
     output mRD,
     output mWR,
-    input WrRegDSrc,
+    output WrRegDSrc,
     output RegWre,
     output ALUSrcA,
     output ALUSrcB,
@@ -41,4 +41,5 @@ module ControlUnit(
     output [0:0] PCSrc,
     output [2:0] State
     );
+    
 endmodule

@@ -18,13 +18,32 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+`include "defines.v"
 
 module ALU(
+    input [3:0] ALUOp,
     input [31:0] A,
     input [31:0] B,
     output Sign,
     output Zero,
-    output [31:0] Result
+    output reg [31:0] Result
     );
+
+    always @(*) begin
+        case (ALUOp)
+            `ALU_OP_ADD: Result = (A + B);
+            `ALU_OP_SUB: Result = (A - B);
+            `ALU_OP_SLL: Result = (B << A);
+            `ALU_OP_OR: Result = (A | B);
+            `ALU_OP_AND: Result = (A & B);
+            `ALU_OP_LT: Result = (A < B) ? 1 : 0;
+            `ALU_OP_SLT: Result = (((A < B) && (A[31] == B[31])) || ((A[31] && !B[31]))) ? 1 : 0;
+            `ALU_OP_XOR: Result = (A ^ B);
+            default: Result = 0;
+        endcase
+    end
+    
+    assign Zero = (Result == 0) ? 1 : 0;
+    assign Sign = Result[31];
+    
 endmodule
