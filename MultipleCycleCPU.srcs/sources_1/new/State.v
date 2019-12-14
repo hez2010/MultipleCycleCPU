@@ -35,11 +35,10 @@ module State (
                 `STATE_IF: StateOut = `STATE_ID;
                 `STATE_ID: begin
                     if (OpCode == `OP_ADD || OpCode == `OP_SUB || OpCode == `OP_ADDIU ||
-                        OpCode == `OP_AND || OpCode == `OP_ANDI || OpCode == `OP_ORI ||
-                        OpCode == `OP_XORI || OpCode == `OP_SLL || OpCode == `OP_SLT ||
-                        OpCode == `OP_SLTI) StateOut = `STATE_EXE_AL;
+                        OpCode == `OP_AND || OpCode == `OP_ANDI || OpCode == `OP_OR ||
+                        OpCode == `OP_XORI || OpCode == `OP_SLL || OpCode == `OP_SLTI) StateOut = `STATE_EXE_AL;
                     if (OpCode == `OP_BNE || OpCode == `OP_BEQ || OpCode == `OP_BLTZ) StateOut = `STATE_EXE_BR;
-                    if (OpCode == `OP_SW || OpCode == `OP_LW) StateOut = STATE_EXE_LS;
+                    if (OpCode == `OP_SW || OpCode == `OP_LW) StateOut = `STATE_EXE_LS;
                     if (OpCode == `OP_J || OpCode == `OP_JAL || OpCode == `OP_JR || 
                         OpCode == `OP_HALT) StateOut = `STATE_IF;
                 end
@@ -51,7 +50,7 @@ module State (
                     if (OpCode == `OP_SW) StateOut = `STATE_IF;
                     if (OpCode == `OP_LW) StateOut = `STATE_WB_LD;
                 end
-                `STATE_WB_LD: StateOut = STATE_IF;
+                `STATE_WB_LD: StateOut = `STATE_IF;
                 default: StateOut = `STATE_IF;
             endcase
         end

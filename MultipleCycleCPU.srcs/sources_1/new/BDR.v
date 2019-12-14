@@ -22,8 +22,8 @@
 
 module BDR(
     input CLK,
-    input [31:0] DataIn;
-    output reg [31:0] DataOut;
+    input [31:0] DataIn,
+    output reg [31:0] DataOut
     );
 
     always @(negedge CLK) DataOut <= DataIn;
