@@ -29,3 +29,21 @@ module Selector1In2#(
 
     assign Y = Sel ? B : A;
 endmodule
+
+module Selector1In3#(
+    parameter WIDTH = 5
+)(
+    input [1:0] Sel,
+    input [WIDTH-1:0] A,
+    input [WIDTH-1:0] B,
+    input [WIDTH-1:0] C,
+    output reg [WIDTH-1:0] Y);
+
+    case (Sign)
+        2'b00: Y <= A;
+        2'b01: Y <= B;
+        2'b10: Y <= C;
+        default: Y <= 0;
+    endcase
+    
+endmodule
