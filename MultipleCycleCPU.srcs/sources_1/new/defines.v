@@ -16,20 +16,21 @@
 `define OP_SUB 6'b000001
 `define OP_ADDIU 6'b000010
 
-`define OP_ANDI 6'b010000
-`define OP_AND 6'b010001
-`define OP_OR 6'b010011
+`define OP_AND 6'b010000
+`define OP_ANDI 6'b010001
+`define OP_ORI 6'b010010
 `define OP_XORI 6'b010011
 
 `define OP_SLL 6'b011000
-`define OP_SLTI 6'b011100
+`define OP_SLTI 6'b100110
+`define OP_SLT 6'b100111
 
-`define OP_SW 6'b100110
-`define OP_LW 6'b100111
+`define OP_SW 6'b110000
+`define OP_LW 6'b110001
 
-`define OP_BEQ 6'b110000
-`define OP_BNE 6'b110001
-`define OP_BLTZ 6'b110010
+`define OP_BEQ 6'b110100
+`define OP_BNE 6'b110101
+`define OP_BLTZ 6'b110110
 
 `define OP_J 6'b111000
 `define OP_JR 6'b111001
