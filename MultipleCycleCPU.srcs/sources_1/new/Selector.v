@@ -8,7 +8,7 @@
 // Module Name: Selector
 // Project Name: MultipleCycleCPU
 // Target Devices: Basys3
-// Tool Versions: 2019.1.3
+// Tool Versions: 2019.2
 // Description: Selectors
 //
 // Dependencies: -
@@ -39,11 +39,13 @@ module Selector1In3#(
     input [WIDTH-1:0] C,
     output reg [WIDTH-1:0] Y);
 
-    case (Sign)
-        2'b00: Y <= A;
-        2'b01: Y <= B;
-        2'b10: Y <= C;
-        default: Y <= 0;
-    endcase
+    always @(Sel or A or B or C) begin
+        case (Sel)
+            2'b00: Y <= A;
+            2'b01: Y <= B;
+            2'b10: Y <= C;
+            default: Y <= 0;
+        endcase
+    end
     
 endmodule

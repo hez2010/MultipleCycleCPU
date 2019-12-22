@@ -66,7 +66,7 @@ module NextPCHelper(
             case (PCSrc)
                 `PC_NEXT: NextPC = PC + 4;
                 `PC_REL_JUMP: NextPC = PC + 4 + (Immediate << 2);
-                `PC_REG_JUMP: NextPC = RegPC,
+                `PC_REG_JUMP: NextPC = RegPC;
                 `PC_ABS_JUMP: NextPC = JumpPC;
                 default: NextPC = PC + 4;
             endcase

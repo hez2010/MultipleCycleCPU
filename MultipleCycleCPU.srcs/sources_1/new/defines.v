@@ -45,7 +45,7 @@
 `define PC_ABS_JUMP 2'b11
 
 // Instruction Memory
-`define MEMORY_FILE_PATH "C:/Users/hez20/Vivado/MultipleCycleCPU/Data/Memory.txt"
+`define MEMORY_FILE_PATH "C:/Users/hez2010/Desktop/MultipleCycleCPU/Data/Memory.txt"
 
 // IR States
 `define STATE_IF 3'b000

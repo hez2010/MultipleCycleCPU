@@ -24,7 +24,7 @@ module IR(
     input CLK,
     input IRWre,
     input [31:0] DataIn,
-    output [31:0] DataOut
+    output reg [31:0] DataOut
     );
     always @(negedge CLK) begin
         if (IRWre) DataOut <= DataIn;

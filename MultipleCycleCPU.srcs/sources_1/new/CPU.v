@@ -29,7 +29,7 @@ module CPU(
     output [31:0] ReadData2,
     output [31:0] ALUOut,
     output [31:0] DataOut,
-    output [2:0] State.
+    output [2:0] State,
     output [4:0] Rs,
     output [4:0] Rt,
     output [4:0] Rd
@@ -55,14 +55,14 @@ module CPU(
     IR ir(CLK, IRWre, IDataOut_T, InsOut);
     ControlUnit cu(InsOut[31:26], CLK, RST, Zero, Sign, PCWre, IRWre, InsMemRW, mRD, mWR, WrRegDSrc, RegWre, ALUSrcA, ALUSrcB, ALUOp, DBDataSrc, ExtSel, PCSrc, RegDst, State_T);
     Selector1In3#(5) wr(RegDst, 5'b11111, InsOut[20:16], InsOut[15:11], WriteReg);
-    Selector1In2#(5) wd(WrRegDSrc, IAddress + 4, DBDRDataOut, WriteData);
+    Selector1In2#(32) wd(WrRegDSrc, IAddress + 4, DBDRDataOut, WriteData);
     RegisterFile regFile(CLK, RST, RegWre, InsOut[25:21], InsOut[20:16], WriteReg, WriteData, ReadData1_T, ReadData2_T);
     SignZeroExtend szExtend(ExtSel, InsOut[15:0], ExtendDataOut);
     JumpPCHelper jPC(IAddress, InsOut[25:0], JumpPC);
     NextPCHelper nPC(RST, PCSrc, IAddress, ExtendDataOut, ReadData1_T, JumpPC, NextPC_T);
     ADR adr(CLK, ReadData1_T, ADROut);
     BDR bdr(CLK, ReadData2_T, BDROut);
-    assign ExtendSa = {{27{0}}, InsOut[10:6]};
+    assign ExtendSa = {27'b000000000000000000000000000, InsOut[10:6]};
     Selector1In2#(32) sa(ALUSrcA, ADROut, ExtendSa, A);
     Selector1In2#(32) sb(ALUSrcB, BDROut, ExtendDataOut, B);
     ALU alu(ALUOp, A, B, Sign, Zero, Result);
