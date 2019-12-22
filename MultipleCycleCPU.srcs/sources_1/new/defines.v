@@ -41,8 +41,8 @@
 // PC Src
 `define PC_NEXT 2'b00
 `define PC_REL_JUMP 2'b01
-`define PC_ABS_JUMP 2'b10
-`define PC_HALT 2'b11
+`define PC_REG_JUMP 2'b10
+`define PC_ABS_JUMP 2'b11
 
 // Instruction Memory
 `define MEMORY_FILE_PATH "C:/Users/hez20/Vivado/MultipleCycleCPU/Data/Memory.txt"

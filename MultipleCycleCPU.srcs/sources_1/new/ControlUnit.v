@@ -133,13 +133,6 @@ module ControlUnit(
         if (OpCode == `OP_HALT) PCWre = 0;
         IRWre = (State == `STATE_IF) ? 1 : 0;
 
-        // PCSrc
-        if ((State == `STATE_IF || State == STATE_ID) && OpCode == `OP_JR) PCSrc = 2'b10;
-        else if ((State == `STATE_IF || State == STATE_ID) && (OpCode == `OP_J || OpCode == `OP_JAL)) PCSrc = 2'b11;
-        else if ((State == `STATE_EXE_AL || State == `STATE_EXE_BR || State == `STATE_EXE_LS) && 
-            (OpCode == `OP_BEQ && Zero) || (OpCode == `OP_BNE && !Zero) || (OpCode == `OP_BLTZ && Sign)) PCSrc = 2'b01;
-        else PCSrc = 2'b00;
-
         // ALUOp
         case (OpCode)
             `OP_ADD, `OP_ADDIU, `OP_SW, `OP_LW: ALUOp = 3'b000;
@@ -150,5 +143,12 @@ module ControlUnit(
             `OP_SLTI, `OP_SLT: ALUOp = 3'b110;
             `OP_XORI: ALUOp = 3'b111;
         endcase
+        
+        // PCSrc
+        if ((State == `STATE_IF || State == STATE_ID) && OpCode == `OP_JR) PCSrc = 2'b10;
+        else if ((State == `STATE_IF || State == STATE_ID) && (OpCode == `OP_J || OpCode == `OP_JAL)) PCSrc = 2'b11;
+        else if ((State == `STATE_EXE_AL || State == `STATE_EXE_BR || State == `STATE_EXE_LS) && 
+            (OpCode == `OP_BEQ && Zero) || (OpCode == `OP_BNE && !Zero) || (OpCode == `OP_BLTZ && Sign)) PCSrc = 2'b01;
+        else PCSrc = 2'b00;
     end
 endmodule
