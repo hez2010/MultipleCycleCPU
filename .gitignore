@@ -8,6 +8,7 @@ this is an example .gitignore file for Vivado, please treat it as an example as
 MultipleCycleCPU.cache/
 MultipleCycleCPU.hw/
 MultipleCycleCPU.runs/
+MultipleCycleCPU.sim/
 !*/
 !.gitignore
 ###########################################################################
