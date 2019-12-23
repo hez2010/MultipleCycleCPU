@@ -34,11 +34,11 @@ module InstructionMemory(
     
     always @(IAddr or RW) begin
         if (RW) begin
-            $display("iaddr = %h", IAddr);
             DataOut[31:24] = memory[IAddr];
             DataOut[23:16] = memory[IAddr + 1];
             DataOut[15:8] = memory[IAddr + 2];
             DataOut[7:0] = memory[IAddr + 3];
+            $display("[Ins Mem] addr = %h, data = %h", IAddr, DataOut);
         end
     end
 endmodule

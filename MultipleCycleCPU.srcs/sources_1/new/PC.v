@@ -31,7 +31,7 @@ module PC(
     initial NextPCAddr = 0;
 
     always @(posedge CLK or negedge RST) begin
-        if (!RST) NextPCAddr <= 0;
+        if (!RST) NextPCAddr <= 32'hFFFFFFFC;
         else if (PCWre || !PCAddr) NextPCAddr <= PCAddr;
     end
 endmodule

@@ -38,6 +38,7 @@ module DataMemory(
     
     always @(negedge CLK) begin
         if (mWR) begin
+            $display("[Data Memory] addr = %h, data = %h", DAddr, DataIn);
             memory[DAddr] <= DataIn[31:24];
             memory[DAddr + 1] <= DataIn[23:16];
             memory[DAddr + 2] <= DataIn[15:8];
