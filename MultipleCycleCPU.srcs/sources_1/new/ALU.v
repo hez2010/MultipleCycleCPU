@@ -41,7 +41,7 @@ module ALU(
             `ALU_OP_XOR: Result = (A ^ B);
             default: Result = 0;
         endcase
-        $display("[ALU] calculated result [%h] from a=[%h] aluOpCode=[%b] b=[%h]", Result, A, ALUOp, B);
+        $display("[ALU] calculated result [%h] from a = [%h] aluOpCode = [%b] b = [%h]", Result, A, ALUOp, B);
     end
     
     assign Zero = (Result == 0) ? 1 : 0;
