@@ -94,7 +94,7 @@ module ControlUnit(
     end
 
     always @(RST or State or Zero or Sign or OpCode) begin
-        $display("[Control Unit] state = %h, opcode = %h", State, OpCode);
+        $display("[ControlUnit] state = [%b], opCode = [%b]", State, OpCode);
         ALUSrcA = ((State == `STATE_EXE_AL || State == `STATE_EXE_BR || State == `STATE_EXE_LS) && OpCode == `OP_SLL) ? 1 : 0;
         ALUSrcB = ((State == `STATE_EXE_AL || State == `STATE_EXE_BR || State == `STATE_EXE_LS) && 
             (OpCode == `OP_ADDIU || OpCode == `OP_ANDI || 

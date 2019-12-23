@@ -70,7 +70,6 @@ module NextPCHelper(
                 `PC_ABS_JUMP: NextPC = JumpPC;
                 default: NextPC = PC + 4;
             endcase
-            $display("[NextPC] addr = %h, pcSrc = %h", NextPC, PCSrc);
         end
     end
 endmodule

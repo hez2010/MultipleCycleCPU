@@ -27,8 +27,7 @@ module IR(
     output reg [31:0] DataOut
     );
     always @(negedge CLK) begin
-        if (IRWre) begin 
-            $display("[IR] data = %h", DataIn);
+        if (IRWre) begin
             DataOut <= DataIn;
         end
     end

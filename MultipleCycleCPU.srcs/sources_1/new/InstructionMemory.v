@@ -38,7 +38,7 @@ module InstructionMemory(
             DataOut[23:16] = memory[IAddr + 1];
             DataOut[15:8] = memory[IAddr + 2];
             DataOut[7:0] = memory[IAddr + 3];
-            $display("[Ins Mem] addr = %h, data = %h", IAddr, DataOut);
+            $display("[InstructionMemory] Loaded instruction [%h] from address [%h]", DataOut, IAddr);
         end
     end
 endmodule
