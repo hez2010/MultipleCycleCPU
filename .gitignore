@@ -54,7 +54,9 @@ MultipleCycleCPU.runs/
 #########
 #Documents
 !Documents/
+!Documents/*.pdf
 #########
 #Data
 !Data/
+!Data/*.txt
 #########
