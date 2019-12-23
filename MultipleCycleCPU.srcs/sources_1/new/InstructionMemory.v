@@ -26,7 +26,7 @@ module InstructionMemory(
     output reg [31:0] DataOut
     );
     
-    reg [7:0] memory[0:127];
+    reg [7:0] memory[0:95];
     
     initial begin
         $readmemb(`MEMORY_FILE_PATH, memory);

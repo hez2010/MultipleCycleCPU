@@ -45,6 +45,7 @@ module RegisterFile(
             end
         end
         else if (WE && WriteReg) begin
+            $display("[Register File] reg = $%d, data = %h", WriteReg, WriteData);
             register[WriteReg] <= WriteData;
         end
     end

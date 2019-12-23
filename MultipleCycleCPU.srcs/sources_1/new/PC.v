@@ -60,7 +60,7 @@ module NextPCHelper(
     input [31:0] JumpPC,
     output reg [31:0] NextPC);
 
-    always @(*) begin
+    always @(RST or PCSrc or PC or Immediate or RegPC or JumpPC) begin
         if (!RST) NextPC = PC + 4;
         else begin
             case (PCSrc)
@@ -70,6 +70,7 @@ module NextPCHelper(
                 `PC_ABS_JUMP: NextPC = JumpPC;
                 default: NextPC = PC + 4;
             endcase
+            $display("[NextPC] addr = %h, pcSrc = %h", NextPC, PCSrc);
         end
     end
 endmodule

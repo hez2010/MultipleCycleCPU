@@ -119,11 +119,11 @@ module ControlUnit(
         IRWre = (State == `STATE_IF) ? 1 : 0;
 
         // PCSrc
-        if ((State == `STATE_IF || State == `STATE_ID) && OpCode == `OP_JR) PCSrc = 2'b10;
-        else if ((State == `STATE_IF || State == `STATE_ID) && (OpCode == `OP_J || OpCode == `OP_JAL)) PCSrc = 2'b11;
+        if ((State == `STATE_IF || State == `STATE_ID) && OpCode == `OP_JR) PCSrc = `PC_REG_JUMP;
+        else if ((State == `STATE_IF || State == `STATE_ID) && (OpCode == `OP_J || OpCode == `OP_JAL)) PCSrc = `PC_ABS_JUMP;
         else if ((State == `STATE_EXE_AL || State == `STATE_EXE_BR || State == `STATE_EXE_LS) && 
-            (OpCode == `OP_BEQ && Zero) || (OpCode == `OP_BNE && !Zero) || (OpCode == `OP_BLTZ && Sign)) PCSrc = 2'b01;
-        else PCSrc = 2'b00;
+            (OpCode == `OP_BEQ && Zero) || (OpCode == `OP_BNE && !Zero) || (OpCode == `OP_BLTZ && Sign)) PCSrc = `PC_REL_JUMP;
+        else PCSrc = `PC_NEXT;
 
         if (OpCode == `OP_HALT) PCWre = 0;
 

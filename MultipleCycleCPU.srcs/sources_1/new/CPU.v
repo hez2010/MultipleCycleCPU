@@ -59,10 +59,13 @@ module CPU(
     Selector1In2#(32) wd(WrRegDSrc, IAddress + 4, DBDRDataOut, WriteData);
     RegisterFile regFile(CLK, RST, RegWre, InsOut[25:21], InsOut[20:16], WriteReg, WriteData, ReadData1_T, ReadData2_T);
     SignZeroExtend szExtend(ExtSel, InsOut[15:0], ExtendDataOut);
+
     JumpPCHelper jPC(IAddress, InsOut[25:0], JumpPC);
     NextPCHelper nPC(RST, PCSrc, IAddress, ExtendDataOut, ReadData1_T, JumpPC, NextPC_T);
+
     ADR adr(CLK, ReadData1_T, ADROut);
     BDR bdr(CLK, ReadData2_T, BDROut);
+
     assign ExtendSa = {27'b000000000000000000000000000, InsOut[10:6]};
     Selector1In2#(32) sa(ALUSrcA, ADROut, ExtendSa, A);
     Selector1In2#(32) sb(ALUSrcB, BDROut, ExtendDataOut, B);
