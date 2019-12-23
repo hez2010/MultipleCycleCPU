@@ -43,15 +43,16 @@ module CPU(
     wire [2:0] State_T;
     // -- CU end
 
-    wire [31:0] IAddress, IDataIn, IDataOut_T, InsOut, ExtendDataOut;
+    wire [31:0] IAddress, IDataOut_T, InsOut, ExtendDataOut;
     wire [31:0] DBDRDataIn, DBDRDataOut;
-    wire [4:0] WriteReg, WriteData;
+    wire [4:0] WriteReg;
+    wire [31:0] WriteData;
     wire [31:0] JumpPC, NextPC_T;
     wire [31:0] ADROut, BDROut, ExtendSa, ALUoutDROut, A, B, Result, DataOut_T;
     wire [31:0] ReadData1_T, ReadData2_T;
 
     PC pc(CLK, RST, PCWre, NextPC, IAddress);
-    InstructionMemory im(InsMemRW, IAddress, IDataIn, IDataOut_T);
+    InstructionMemory im(InsMemRW, IAddress, IDataOut_T);
     IR ir(CLK, IRWre, IDataOut_T, InsOut);
     ControlUnit cu(InsOut[31:26], CLK, RST, Zero, Sign, PCWre, IRWre, InsMemRW, mRD, mWR, WrRegDSrc, RegWre, ALUSrcA, ALUSrcB, ALUOp, DBDataSrc, ExtSel, PCSrc, RegDst, State_T);
     Selector1In3#(5) wr(RegDst, 5'b11111, InsOut[20:16], InsOut[15:11], WriteReg);

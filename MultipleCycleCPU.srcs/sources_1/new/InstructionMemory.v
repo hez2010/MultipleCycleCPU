@@ -23,11 +23,10 @@
 module InstructionMemory(
     input RW,
     input [31:0] IAddr,
-    input [31:0] DataIn,
     output reg [31:0] DataOut
     );
     
-    reg [7:0] memory[0:64];
+    reg [7:0] memory[0:127];
     
     initial begin
         $readmemb(`MEMORY_FILE_PATH, memory);
@@ -35,6 +34,7 @@ module InstructionMemory(
     
     always @(IAddr or RW) begin
         if (RW) begin
+            $display("iaddr = %h", IAddr);
             DataOut[31:24] = memory[IAddr];
             DataOut[23:16] = memory[IAddr + 1];
             DataOut[15:8] = memory[IAddr + 2];

@@ -21,7 +21,7 @@
 `include "defines.v"
 
 module ALU(
-    input [3:0] ALUOp,
+    input [2:0] ALUOp,
     input [31:0] A,
     input [31:0] B,
     output Sign,
