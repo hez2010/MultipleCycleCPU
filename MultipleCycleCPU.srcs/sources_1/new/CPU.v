@@ -28,7 +28,7 @@ module CPU(
     output [31:0] ReadData1,
     output [31:0] ReadData2,
     output [31:0] ALUOut,
-    output [31:0] DataOut,
+    output [31:0] DBDataOut,
     output [2:0] State,
     output [4:0] Rs,
     output [4:0] Rt,
@@ -48,7 +48,7 @@ module CPU(
     wire [4:0] WriteReg;
     wire [31:0] WriteData;
     wire [31:0] JumpPC, NextPC_T;
-    wire [31:0] ADROut, BDROut, ExtendSa, ALUoutDROut, A, B, Result, DataOut_T;
+    wire [31:0] ADROut, BDROut, ExtendSa, ALUoutDROut, A, B, Result, DBDataOut_T;
     wire [31:0] ReadData1_T, ReadData2_T;
 
     PC pc(CLK, RST, PCWre, NextPC, IAddress);
@@ -71,8 +71,8 @@ module CPU(
     Selector1In2#(32) sb(ALUSrcB, BDROut, ExtendDataOut, B);
     ALU alu(ALUOp, A, B, Sign, Zero, Result);
     ALUoutDR aodr(CLK, Result, ALUoutDROut);
-    DataMemory dm(CLK, mRD, mWR, ALUoutDROut, BDROut, DataOut_T);
-    Selector1In2#(32) sDBData(DBDataSrc, Result, DataOut_T, DBDRDataIn);
+    DataMemory dm(CLK, mRD, mWR, ALUoutDROut, BDROut, DBDataOut_T);
+    Selector1In2#(32) sDBData(DBDataSrc, Result, DBDataOut_T, DBDRDataIn);
     DBDR dbdr(CLK, DBDRDataIn, DBDRDataOut);
 
     assign CurrentPC = IAddress;
@@ -84,6 +84,6 @@ module CPU(
     assign Rt = InsOut[20:16];
     assign Rd = InsOut[15:11];
     assign ALUOut = Result;
-    assign DataOut = DataOut_T;
+    assign DBDataOut = DBDataOut_T;
     assign State = State_T;
 endmodule

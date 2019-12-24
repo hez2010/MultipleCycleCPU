@@ -24,10 +24,10 @@ module Display(
   input CLK,
   input [7:0] CurrentPC,
   input [7:0] NextPC,
-  input [7:0] RSAddr,
-  input [7:0] RSData,
-  input [7:0] RTAddr,
-  input [7:0] RTData,
+  input [7:0] RsAddr,
+  input [7:0] RsData,
+  input [7:0] RtAddr,
+  input [7:0] RtData,
   input [7:0] ALUResult,
   input [7:0] DBData,
   output reg [3:0] LEDNumber, // select LED
@@ -41,8 +41,8 @@ module Display(
   always @(posedge CLK) begin
     case(Mode) 
       2'b00: displayContent <= {CurrentPC, NextPC};
-      2'b01: displayContent <= {RSAddr, RSData};
-      2'b10: displayContent <= {RTAddr, RTData};
+      2'b01: displayContent <= {RsAddr, RsData};
+      2'b10: displayContent <= {RtAddr, RtData};
       2'b11: displayContent <= {ALUResult, DBData};
     endcase
     
