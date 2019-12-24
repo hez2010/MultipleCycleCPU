@@ -39,7 +39,6 @@ module ALU(
             `ALU_OP_LT: Result = (A < B) ? 1 : 0;
             `ALU_OP_SLT: Result = (((A < B) && (A[31] == B[31])) || ((A[31] && !B[31]))) ? 1 : 0;
             `ALU_OP_XOR: Result = (A ^ B);
-            default: Result = 0;
         endcase
         $display("[ALU] calculated result [%h] from a = [%h] aluOpCode = [%b] b = [%h]", Result, A, ALUOp, B);
     end

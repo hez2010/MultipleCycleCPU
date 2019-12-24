@@ -104,7 +104,7 @@ module ControlUnit(
 
         DBDataSrc = (OpCode == `OP_LW) ? 1 : 0; 
         
-        mRD = (State == `STATE_MEM && OpCode == `OP_LW) ? 1 : 0;
+        mRD = ((State == `STATE_MEM || State == `STATE_WB_LD) && OpCode == `OP_LW) ? 1 : 0;
         mWR = (State == `STATE_MEM && OpCode == `OP_SW) ? 1 : 0;
 
         ExtSel = ((State == `STATE_EXE_AL || State == `STATE_EXE_BR || State == `STATE_EXE_LS) && (OpCode == `OP_ANDI || OpCode == `OP_ORI || OpCode == `OP_XORI)) ? 0 : 1;
@@ -127,13 +127,13 @@ module ControlUnit(
 
         // ALUOp
         case (OpCode)
-            `OP_ADD, `OP_ADDIU, `OP_SW, `OP_LW: ALUOp = 3'b000;
-            `OP_SUB, `OP_BEQ, `OP_BNE, `OP_BLTZ: ALUOp = 3'b001;
-            `OP_SLL: ALUOp = 3'b010;
-            `OP_ORI: ALUOp = 3'b011;
-            `OP_AND, `OP_ANDI: ALUOp = 3'b100;
-            `OP_SLTI, `OP_SLT: ALUOp = 3'b110;
-            `OP_XORI: ALUOp = 3'b111;
+            `OP_ADD, `OP_ADDIU, `OP_SW, `OP_LW: ALUOp = `ALU_OP_ADD;
+            `OP_SUB, `OP_BEQ, `OP_BNE, `OP_BLTZ: ALUOp = `ALU_OP_SUB;
+            `OP_SLL: ALUOp = `ALU_OP_SLL;
+            `OP_ORI: ALUOp = `ALU_OP_OR;
+            `OP_AND, `OP_ANDI: ALUOp = `ALU_OP_AND;
+            `OP_SLTI, `OP_SLT: ALUOp = `ALU_OP_SLT;
+            `OP_XORI: ALUOp = `ALU_OP_XOR;
         endcase
     end
 
