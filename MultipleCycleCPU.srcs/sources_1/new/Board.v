@@ -24,7 +24,7 @@ module Board(
     input CLK,
     input KeyCLK,
     input RST,
-    input [1:0] Mode,
+    input [2:0] Mode,
     output [3:0] LEDNumber,
     output [6:0] LEDCode
 );
@@ -46,7 +46,7 @@ module Board(
 
     DivClock divc(CLK, DivCLK);
     Key key(DivCLK, KeyCLK, CLKOut);
-    Display display(Mode, DivCLK, CurrentPC[7:0], NextPC[7:0], {3'b000, Rs}, ReadData1[7:0], {3'b000, Rt}, ReadData2[7:0], ALUout[7:0], DBDataOut[7:0], LEDNumber, LEDCode);
+    Display display(Mode, DivCLK, CurrentPC[7:0], NextPC[7:0], {3'b000, Rs}, ReadData1[7:0], {3'b000, Rt}, ReadData2[7:0], ALUout[7:0], DBDataOut[7:0], {5'b00000, State[2:0]}, LEDNumber, LEDCode);
     CPU cpu(CLKOut, RST, CurrentPC, NextPC, IDataOut, ReadData1, ReadData2, ALUout, DBDataOut, State, Rs, Rt, Rd);
     
 endmodule

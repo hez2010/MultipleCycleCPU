@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Display(
-  input [1:0] Mode,
+  input [2:0] Mode,
   input CLK,
   input [7:0] CurrentPC,
   input [7:0] NextPC,
@@ -30,6 +30,7 @@ module Display(
   input [7:0] RtData,
   input [7:0] ALUResult,
   input [7:0] DBData,
+  input [7:0] State,
   output reg [3:0] LEDNumber, // select LED
   output reg [6:0] LEDCode // display content code
   );
@@ -40,10 +41,11 @@ module Display(
 
   always @(posedge CLK) begin
     case(Mode) 
-      2'b00: displayContent <= {CurrentPC, NextPC};
-      2'b01: displayContent <= {RsAddr, RsData};
-      2'b10: displayContent <= {RtAddr, RtData};
-      2'b11: displayContent <= {ALUResult, DBData};
+      3'b000: displayContent <= {CurrentPC, NextPC};
+      3'b001: displayContent <= {RsAddr, RsData};
+      3'b010: displayContent <= {RtAddr, RtData};
+      3'b011: displayContent <= {ALUResult, DBData};
+      3'b100: displayContent <= {8'h00, State};
     endcase
     
     selector = (selector + 1) % 4;
