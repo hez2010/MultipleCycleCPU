@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "defines.v"
+`include "Defines.v"
 
 module InstructionMemory(
     input RW,

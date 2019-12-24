@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "defines.v"
+`include "Defines.v"
 
 module ALU(
     input [2:0] ALUOp,
