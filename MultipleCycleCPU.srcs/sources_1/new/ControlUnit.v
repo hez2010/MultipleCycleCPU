@@ -46,7 +46,7 @@ module ControlUnit(
     initial begin
         PCWre = 1;
         IRWre = 0;
-        InsMemRW = 0;
+        InsMemRW = 1;
         mRD = 1;
         mWR = 1;
         WrRegDSrc = 1;
