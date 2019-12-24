@@ -46,7 +46,7 @@ module ControlUnit(
     initial begin
         PCWre = 1;
         IRWre = 0;
-        InsMemRW = 1;
+        InsMemRW = 0;
         mRD = 1;
         mWR = 1;
         WrRegDSrc = 1;
@@ -126,7 +126,7 @@ module ControlUnit(
             `STATE_ID: begin
                 IRWre <= 0;
                 ExtSel <= (OpCode == `OP_ANDI || OpCode == `OP_ORI || OpCode == `OP_XORI) ? 0 : 1;
-                
+                if (OpCode == `OP_HALT) PCWre <= 0;
                 if (OpCode == `OP_JR) PCSrc <= `PC_REG_JUMP;
                 else if (OpCode == `OP_J || OpCode == `OP_JAL) PCSrc <= `PC_ABS_JUMP;
                 else if ((OpCode == `OP_BEQ && Zero) || (OpCode == `OP_BNE && !Zero) || (OpCode == `OP_BLTZ && Sign)) PCSrc <= `PC_REL_JUMP;
@@ -156,7 +156,6 @@ module ControlUnit(
                     `OP_AND, `OP_ANDI: ALUOp <= `ALU_OP_AND;
                     `OP_SLTI, `OP_SLT: ALUOp <= `ALU_OP_SLT;
                     `OP_XORI: ALUOp <= `ALU_OP_XOR;
-                    `OP_HALT: PCWre <= 0;
                 endcase
 
                 DBDataSrc <= (OpCode == `OP_LW) ? 1 : 0;
