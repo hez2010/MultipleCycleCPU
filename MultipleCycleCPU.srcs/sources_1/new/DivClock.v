@@ -20,13 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module DivClock(
-  input CLK,
-  output CLKOut
-  );
+    input CLK,
+    output CLKOut
+    );
 
-  reg [16:0] counter;
+    reg [16:0] counter;
 
-  always @(posedge CLK) counter <= counter + 1;
+    always @(posedge CLK) counter <= counter + 1;
 
-  assign CLKOut = counter[16];
+    assign CLKOut = counter[16];
 endmodule

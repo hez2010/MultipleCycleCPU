@@ -20,12 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Key(
-  input CLK,
-  input KeyWre,
-  output reg CLKOut
-  );
+    input CLK,
+    input KeyWre,
+    output reg CLKOut
+    );
 
-  always @(posedge CLK) begin
-    CLKOut <= KeyWre ? 0 : 1;
-  end
+    always @(posedge CLK) begin
+        CLKOut <= KeyWre ? 0 : 1;
+    end
 endmodule
